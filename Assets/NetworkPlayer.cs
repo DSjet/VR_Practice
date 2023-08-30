@@ -29,11 +29,13 @@ public class NetworkPlayer : PunBehaviour
         leftHandOrigin = xrOrigin.transform.Find("Camera Offset/LeftHand Controller");
         rightHandOrigin = xrOrigin.transform.Find("Camera Offset/RightHand Controller");
 
-
-        // disable network player renderer if the game objects spawned
-        foreach(var item in GetComponentsInChildren<Renderer>())
+        if (photonView.isMine)
         {
-            item.enabled = false;
+            // disable network player renderer if the game objects spawned
+            foreach(var item in GetComponentsInChildren<Renderer>())
+            {
+                item.enabled = false;
+            }
         }
     }
 
